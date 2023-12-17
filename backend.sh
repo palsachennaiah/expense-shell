@@ -1,6 +1,11 @@
 log_file="/tmp/expense.log"
 color="\e[33m"
 
+if [ -z "$1" ]; then
+  echo Password Input Missing
+  exit
+fi
+
 MYSQL_ROOT_PASSWORD=$1
 
 echo -e "${color} Dissable NodeJS default Version \e[0m"
@@ -105,7 +110,7 @@ else
   echo -e "\e[31m FAILURE \e[0m"
 fi
 
-echo -e "${color} Starting Backend Service File \e[0m"
+echo -e "${color} Starting Backend Service \e[0m"
 systemctl daemon-reload &>>$log_file
 systemctl enable backend &>>$log_file
 systemctl restart backend &>>$log_file
